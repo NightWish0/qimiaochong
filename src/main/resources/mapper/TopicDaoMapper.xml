@@ -2,9 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qimiaochong.dao.TopicDao">
 
+    <sql id="orderByCreated">
+        ORDER BY created_at DESC
+    </sql>
+
     <select id="findAll" resultType="Topic">
-      select * from topic order by created_at DESC
+      SELECT * FROM topic
+      <include refid="orderByCreated"/>
     </select>
+
+    <select id="findById" resultType="Topic" parameterType="long">
+      SELECT * FROM topic WHERE id=#{id}
+    </select>
+
+    <update id="updateOfUser" parameterType="Topic">
+        UPDATE topic SET
+        title=#{title},
+        content=#{content},
+        label_id=#{label_id},
+        deleted_at=#{deleted_at},
+        status=#{status}
+        WHERE id=#{id}
+    </update>
+
+    <insert id="create" parameterType="Topic" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO topic(user_id,title,content,label_id,created_at,status)
+        VALUES (#{user_id},#{title},#{content},#{label_id},#{created_at},#{status})
+    </insert>
+
+    <update id="ban">
+        UPDATE topic SET ban_at=#{ban_at},status=#{status} WHERE id=#{id}
+    </update>
+
+    <update id="delete">
+         UPDATE topic SET deleted_at=#{deleted_at},status=#{status} WHERE id=#{id}
+    </update>
+
+    <delete id="destroy" parameterType="long">
+        DELETE FROM topic WHERE id=#{id}
+    </delete>
 
 
 </mapper>

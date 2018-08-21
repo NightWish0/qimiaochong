@@ -2,8 +2,10 @@ package com.qimiaochong.dao;
 
 import com.qimiaochong.entity.Topic;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -14,14 +16,14 @@ public interface TopicDao{
 
     Topic findById(Long id);
 
-    void update(Topic topic);
+    int updateOfUser(Topic topic);
 
-    void create(Topic topic);
+    int create(Topic topic);
 
-    void ban(Long id);
+    int ban(@Param("id") Long id,@Param("ban_at") Date ban_at, @Param("status") Integer status);
 
-    void unBan(Long id);
+    int delete(@Param("id") Long id,@Param("deleted_at") Date deleted_at,@Param("status") Integer status);
 
-    void delete(Long id);
+    int destroy(Long id);
 
 }
