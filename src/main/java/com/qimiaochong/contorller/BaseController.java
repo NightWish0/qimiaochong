@@ -1,27 +1,21 @@
 package com.qimiaochong.contorller;
 
-import com.qimiaochong.entity.Topic;
-import com.qimiaochong.entity.User;
-import com.qimiaochong.service.TopicService;
-import com.qimiaochong.service.UserService;
+import com.qimiaochong.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BaseController {
 
     @Autowired
-    UserService userService;
-
-    @Autowired
-    TopicService topicService;
+    BaseService baseService;
 
     @GetMapping("/")
-    public String index(){
-        List<Topic> topics=topicService.findAllTopics(1,10);
+    public String index(Model model){
+        baseService.initIndexContent(model);
         return "public/index";
     }
 
@@ -30,9 +24,9 @@ public class BaseController {
         return "public/login";
     }
 
-    @GetMapping("/sign_in")
-    public String signIn(){
-        return "public/singIn";
+    @GetMapping("/register")
+    public String register(){
+        return "public/register";
     }
 
 

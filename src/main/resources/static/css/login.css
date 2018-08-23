@@ -1,33 +1,49 @@
-.gray-bg{
-    background-color: #f9f9f9 ;
+.login-box-msg{
+    font-size: 18px;
+    color: #0084ff;
 }
-.login-main-container{
-    width: 50%;
-    height: 100%;
-    margin: 150px auto;
+.login-box-body .form-group{
+    margin-top: 10px;
+}
+.login-box-body .form-control{
+    border: 0;
+    border-bottom: 1px solid #d8d8d8;
+}
+.login-box-body .form-control:focus{
+    border-bottom: 1px solid #0084ff;
+}
+.forget-password{
+    text-align: right;
+    margin-bottom: 10px;
+}
+.login-div{
+    width: 100%;
+    margin: 0;
+}
+.btn-login{
+    border-color: #0084ff;
+    background-color: #0084ff;
+}
+.btn-login:hover{
+    border-color: #0077e6;
+    background-color: #0077e6;
+}
+.btn-qq,
+.btn-weixin,
+.btn-weibo{
+    color: #8590a6;
+    display: initial;
+    overflow: visible;
+}
+.btn-qq:hover,
+.btn-weixin:hover,
+.btn-weibo:hover{
+    color: #0084ff;
+}
+.btn-social>:first-child{
+    border: 0;
+}
+.no-account{
     text-align: center;
+    margin-top: 20px;
 }
-.login.form-group{
-    margin-top: 30px;
-}
-.lg-name.form-control{
-    width: 300px;
-    margin: auto;
-}
-.lg-pwd.form-control{
-    width: 300px;
-    margin: 20px auto 20px auto;
-}
-.lg-btn.btn.btn-default{
-    margin-bottom: 20px;
-    width: 300px;
-    color: #fff;
-    background-color: #28a745;
-    background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
-}
-.lg-btn.btn.btn-default:hover{
-    background-color: #269f42;
-    background-image: linear-gradient(-180deg, #2fcb53 0%, #269f42 90%);
-    background-position: -.5em;
-}
-

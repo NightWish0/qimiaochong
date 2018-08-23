@@ -6,12 +6,12 @@
         ORDER BY created_at DESC
     </sql>
 
-    <select id="findAll" resultType="Topic">
-      SELECT * FROM topic
+    <select id="findAll" parameterType="int" resultType="Topic">
+      SELECT * FROM topic WHERE status=#{status}
       <include refid="orderByCreated"/>
     </select>
 
-    <select id="findById" resultType="Topic" parameterType="long">
+    <select id="findById" resultType="Topic" parameterType="int">
       SELECT * FROM topic WHERE id=#{id}
     </select>
 
@@ -19,26 +19,26 @@
         UPDATE topic SET
         title=#{title},
         content=#{content},
-        label_id=#{label_id},
-        deleted_at=#{deleted_at},
+        label_id=#{labelId},
+        deleted_at=#{deletedAt},
         status=#{status}
         WHERE id=#{id}
     </update>
 
     <insert id="create" parameterType="Topic" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO topic(user_id,title,content,label_id,created_at,status)
-        VALUES (#{user_id},#{title},#{content},#{label_id},#{created_at},#{status})
+        VALUES (#{userId},#{title},#{content},#{labelId},#{createdAt},#{status})
     </insert>
 
     <update id="ban">
-        UPDATE topic SET ban_at=#{ban_at},status=#{status} WHERE id=#{id}
+        UPDATE topic SET ban_at=#{banAt},status=#{status} WHERE id=#{id}
     </update>
 
     <update id="delete">
-         UPDATE topic SET deleted_at=#{deleted_at},status=#{status} WHERE id=#{id}
+         UPDATE topic SET deleted_at=#{deletedAt},status=#{status} WHERE id=#{id}
     </update>
 
-    <delete id="destroy" parameterType="long">
+    <delete id="destroy" parameterType="int">
         DELETE FROM topic WHERE id=#{id}
     </delete>
 

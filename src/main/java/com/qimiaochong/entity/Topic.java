@@ -1,6 +1,7 @@
 package com.qimiaochong.entity;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,31 +9,32 @@ import java.util.Date;
 @Alias("Topic")
 public class Topic implements Serializable {
 
-    private Long id;
-    private Long user_id;
+    @Id
+    private Integer id;
+    private Integer userId;
     private String title;
     private String content;
-    private Integer like_count;
-    private Long label_id;
-    private Date created_at;
-    private Date ban_at;
-    private Date deleted_at;
+    private Integer likeCount;
+    private Long labelId;
+    private Date createdAt;
+    private Date banAt;
+    private Date deletedAt;
     private Integer status;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -51,44 +53,44 @@ public class Topic implements Serializable {
         this.content = content;
     }
 
-    public Integer getLike_count() {
-        return like_count;
+    public Integer getLikeCount() {
+        return likeCount;
     }
 
-    public void setLike_count(Integer like_count) {
-        this.like_count = like_count;
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
     }
 
-    public Long getLabel_id() {
-        return label_id;
+    public Long getLabelId() {
+        return labelId;
     }
 
-    public void setLabel_id(Long label_id) {
-        this.label_id = label_id;
+    public void setLabelId(Long labelId) {
+        this.labelId = labelId;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getBan_at() {
-        return ban_at;
+    public Date getBanAt() {
+        return banAt;
     }
 
-    public void setBan_at(Date ban_at) {
-        this.ban_at = ban_at;
+    public void setBanAt(Date banAt) {
+        this.banAt = banAt;
     }
 
-    public Date getDeleted_at() {
-        return deleted_at;
+    public Date getDeletedAt() {
+        return deletedAt;
     }
 
-    public void setDeleted_at(Date deleted_at) {
-        this.deleted_at = deleted_at;
+    public void setDeletedAt(Date deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
     public Integer getStatus() {

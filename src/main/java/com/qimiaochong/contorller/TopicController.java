@@ -22,7 +22,7 @@ public class TopicController {
     }
 
     @GetMapping("/topic/{id}")
-    public Topic findOne(@PathVariable Long id){
+    public Topic findOne(@PathVariable Integer id){
         return topicService.findOne(id);
     }
 }

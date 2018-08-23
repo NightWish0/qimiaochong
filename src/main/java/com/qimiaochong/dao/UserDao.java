@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Mapper
 @Component
-public interface UserDao {
+public interface UserDao extends tk.mybatis.mapper.common.Mapper<User> {
 
-    User findById(Long id);
+    User findById(Integer id);
 }

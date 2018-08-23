@@ -20,11 +20,11 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public List<Topic> findAllTopics(Integer pageNum,Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        return topicDao.findAll();
+        return topicDao.findAll(TopicStatus.NORMAL_STATUS);
     }
 
     @Override
-    public Topic findOne(Long id) {
+    public Topic findOne(Integer id) {
         return topicDao.findById(id);
     }
 
@@ -39,22 +39,22 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public boolean ban(Long id) {
+    public boolean ban(Integer id) {
         return topicDao.ban(id,new Date(),TopicStatus.BAN_STATUS)==1;
     }
 
     @Override
-    public boolean unBan(Long id) {
+    public boolean unBan(Integer id) {
         return topicDao.ban(id,new Date(),TopicStatus.NORMAL_STATUS)==1;
     }
 
     @Override
-    public boolean delete(Long id) {
+    public boolean delete(Integer id) {
         return topicDao.delete(id,new Date(), TopicStatus.DELETE_STATUS)==1;
     }
 
     @Override
-    public boolean destroy(Long id) {
+    public boolean destroy(Integer id) {
         return topicDao.destroy(id)==1;
     }
 }

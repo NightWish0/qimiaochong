@@ -4,5 +4,5 @@ import com.qimiaochong.entity.User;
 
 public interface UserService {
 
-    User queryUser(Long id);
+    User queryUser(Integer id);
 }

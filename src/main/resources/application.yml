@@ -7,9 +7,18 @@ debug: false
 mybatis:
   type-aliases-package: com.qimiaochong.entity
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+  not-empty: true
+  identity: MYSQL
+  style: camelhump
+
 

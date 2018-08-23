@@ -12,18 +12,18 @@ import java.util.List;
 @Component
 public interface TopicDao{
 
-    List<Topic> findAll();
+    List<Topic> findAll(Integer status);
 
-    Topic findById(Long id);
+    Topic findById(Integer id);
 
     int updateOfUser(Topic topic);
 
     int create(Topic topic);
 
-    int ban(@Param("id") Long id,@Param("ban_at") Date ban_at, @Param("status") Integer status);
+    int ban(@Param("id") Integer id,@Param("ban_at") Date ban_at, @Param("status") Integer status);
 
-    int delete(@Param("id") Long id,@Param("deleted_at") Date deleted_at,@Param("status") Integer status);
+    int delete(@Param("id") Integer id,@Param("deleted_at") Date deleted_at,@Param("status") Integer status);
 
-    int destroy(Long id);
+    int destroy(Integer id);
 
 }

@@ -1,12 +1,14 @@
 package com.qimiaochong.entity;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
 @Alias("User")
 public class User {
-    private Long id;
+    @Id
+    private Integer id;
     private String name;
     private String password;
     private String avatar;
@@ -14,15 +16,15 @@ public class User {
     private Date birthday;
     private String address;
     private String profile;
-    private Date created_at;
-    private Date deleted_at;
+    private Date createdAt;
+    private Date deletedAt;
     private Integer status;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -82,20 +84,20 @@ public class User {
         this.profile = profile;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getDeleted_at() {
-        return deleted_at;
+    public Date getDeletedAt() {
+        return deletedAt;
     }
 
-    public void setDeleted_at(Date deleted_at) {
-        this.deleted_at = deleted_at;
+    public void setDeletedAt(Date deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
     public Integer getStatus() {
