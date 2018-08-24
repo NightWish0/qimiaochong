@@ -1,0 +1,137 @@
+/*index.html*/
+.login-page{
+    background-image: url("../image/bg-theme-1.jpg");
+    background-size: cover;
+    background-position: top;
+    background-position-y: 180px;
+}
+.login-page .login-box-body{
+    overflow: hidden;
+}
+.login-page .logo-img{
+    width: 160px;
+    height: 160px;
+    margin-left: 80px;
+    margin-bottom: -30px;
+    margin-top: -50px;
+}
+.login-page .login-box, .register-box {
+    width: 360px;
+    margin: 4% auto;
+}
+.login-page .login-box-msg{
+    font-size: 18px;
+    color: #333;
+}
+.login-page .login-box-body .form-group{
+    margin-top: 10px;
+}
+.login-page .login-box-body .form-control{
+    border: 0;
+    border-bottom: 1px solid #d8d8d8;
+}
+.login-page .login-box-body .form-control:focus{
+    border-bottom: 1px solid #0084ff;
+}
+.login-page .forget-password{
+    text-align: right;
+    margin-bottom: 10px;
+}
+.login-page .login-div{
+    width: 100%;
+    margin: 0;
+}
+.login-page .btn-login{
+    border-color: #0084ff;
+    background-color: #0084ff;
+}
+.login-page .btn-login:hover{
+    border-color: #0077e6;
+    background-color: #0077e6;
+}
+.login-page .btn-qq,
+.login-page .btn-weixin,
+.login-page .btn-weibo{
+    color: #8590a6;
+    display: initial;
+    overflow: visible;
+}
+.login-page .btn-qq:hover,
+.login-page .btn-weixin:hover,
+.login-page .btn-weibo:hover{
+    color: #0084ff;
+}
+.login-page .btn-social>:first-child{
+    border: 0;
+}
+.login-page .no-account{
+    text-align: center;
+    margin-top: 20px;
+}
+
+/*register.html*/
+.register-page{
+    background-image: url("../image/bg-theme-1.jpg");
+    background-size: cover;
+    background-position: top;
+    background-position-y: 180px;
+}
+.register-page .register-box-body{
+    overflow: hidden;
+}
+.register-page .logo-img{
+    width: 160px;
+    height: 160px;
+    margin-left: 80px;
+    margin-bottom: -30px;
+    margin-top: -50px;
+}
+.register-page .login-box, .register-box {
+    width: 360px;
+    margin: 4% auto;
+}
+.register-page .register-box-msg{
+    font-size: 18px;
+    color: #333;
+}
+.register-page .register-box-body .form-group{
+    margin-top: 10px;
+}
+.register-page .register-box-body .form-control{
+    border: 0;
+    border-bottom: 1px solid #d8d8d8;
+}
+.register-page .register-box-body .form-control:focus{
+    border-bottom: 1px solid #0084ff;
+}
+.register-page .btn-register{
+    border-color: #0084ff;
+    background-color: #0084ff;
+}
+.register-page .btn-register:hover{
+    border-color: #0077e6;
+    background-color: #0077e6;
+}
+.register-page .register-div{
+    width: 100%;
+    margin: 0;
+}
+.register-page .agreement-div{
+    margin: 0;
+    margin-top: 15px;
+    text-align: center;
+    color: #8590a6;
+}
+.register-page .agreement-div label{
+    font-weight: unset;
+}
+.register-page .agreement-div .agreement-statement{
+    color: #8ca6c5;
+    font-weight: 600;
+}
+.register-page .have-account{
+    margin-top: 5px;
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px dashed #cec8c8;
+}

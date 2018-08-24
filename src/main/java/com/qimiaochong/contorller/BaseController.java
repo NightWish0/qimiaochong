@@ -20,12 +20,12 @@ public class BaseController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String loginPage(){
         return "public/login";
     }
 
     @GetMapping("/register")
-    public String register(){
+    public String registerPage(){
         return "public/register";
     }
 
