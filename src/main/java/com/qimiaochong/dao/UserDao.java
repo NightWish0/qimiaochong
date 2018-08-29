@@ -8,5 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 public interface UserDao extends tk.mybatis.mapper.common.Mapper<User> {
 
-    User findById(Integer id);
+    User findById(Long id);
+
+    int checkUserIsExists(String loginName);
+
+    int create(User user);
 }

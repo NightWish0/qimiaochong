@@ -14,16 +14,16 @@ public interface TopicDao{
 
     List<Topic> findAll(Integer status);
 
-    Topic findById(Integer id);
+    Topic findById(Long id);
 
     int updateOfUser(Topic topic);
 
     int create(Topic topic);
 
-    int ban(@Param("id") Integer id,@Param("ban_at") Date ban_at, @Param("status") Integer status);
+    int ban(@Param("id") Long id,@Param("ban_at") Date ban_at, @Param("status") Integer status);
 
-    int delete(@Param("id") Integer id,@Param("deleted_at") Date deleted_at,@Param("status") Integer status);
+    int delete(@Param("id") Long id,@Param("deleted_at") Date deleted_at,@Param("status") Integer status);
 
-    int destroy(Integer id);
+    int destroy(Long id);
 
 }

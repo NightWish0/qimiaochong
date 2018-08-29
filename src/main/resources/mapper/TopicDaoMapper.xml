@@ -6,12 +6,12 @@
         ORDER BY created_at DESC
     </sql>
 
-    <select id="findAll" parameterType="int" resultType="Topic">
+    <select id="findAll" parameterType="long" resultType="Topic">
       SELECT * FROM topic WHERE status=#{status}
       <include refid="orderByCreated"/>
     </select>
 
-    <select id="findById" resultType="Topic" parameterType="int">
+    <select id="findById" resultType="Topic" parameterType="long">
       SELECT * FROM topic WHERE id=#{id}
     </select>
 
@@ -25,7 +25,7 @@
         WHERE id=#{id}
     </update>
 
-    <insert id="create" parameterType="Topic" useGeneratedKeys="true" keyProperty="id">
+    <insert id="create" parameterType="Topic" useGeneratedKeys="true" keyProperty="long">
         INSERT INTO topic(user_id,title,content,label_id,created_at,status)
         VALUES (#{userId},#{title},#{content},#{labelId},#{createdAt},#{status})
     </insert>

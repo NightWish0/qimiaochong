@@ -10,8 +10,8 @@ import java.util.Date;
 public class Topic implements Serializable {
 
     @Id
-    private Integer id;
-    private Integer userId;
+    private Long id;
+    private Long userId;
     private String title;
     private String content;
     private Integer likeCount;
@@ -21,19 +21,19 @@ public class Topic implements Serializable {
     private Date deletedAt;
     private Integer status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

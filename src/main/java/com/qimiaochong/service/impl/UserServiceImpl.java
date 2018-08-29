@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    public User queryUser(Integer id) {
+    public User queryUser(Long id) {
         return userDao.selectByPrimaryKey(id);
     }
 }

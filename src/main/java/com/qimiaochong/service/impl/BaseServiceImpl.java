@@ -9,9 +9,11 @@ import com.qimiaochong.entity.Topic;
 import com.qimiaochong.entity.User;
 import com.qimiaochong.service.BaseService;
 import com.qimiaochong.service.UserService;
+import org.apache.shiro.codec.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.util.Base64Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +37,7 @@ public class BaseServiceImpl implements BaseService {
             Map<String,String> map=new HashMap<>();
             User user=userDao.findById(topic.getUserId());
             map.put("userId",user.getId().toString());
-            map.put("userName",user.getName());
+            map.put("userName",user.getUsername());
             map.put("userAvatar",user.getAvatar());
             map.put("userProfile",user.getProfile());
             map.put("topicId",topic.getId().toString());
@@ -45,5 +47,19 @@ public class BaseServiceImpl implements BaseService {
             items.add(map);
         }
         model.addAttribute("items",items);
+    }
+
+    @Override
+    public boolean registerHandle(String loginName,String password,Model model) {
+        Integer isExists=userDao.checkUserIsExists(loginName);
+//        String base64Password=Base64.decodeToString();
+        if (isExists==0){
+            User user=new User(loginName,loginName,password);
+            userDao.create(user);
+            return true;
+        }else{
+            model.addAttribute("msg","用户名已存在");
+            return false;
+        }
     }
 }

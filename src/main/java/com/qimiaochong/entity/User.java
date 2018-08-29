@@ -8,11 +8,14 @@ import java.util.Date;
 @Alias("User")
 public class User {
     @Id
-    private Integer id;
-    private String name;
+    private Long id;
+    private String loginName;
+    private String username;
     private String password;
     private String avatar;
     private String gendel;
+    private String phone;
+    private String email;
     private Date birthday;
     private String address;
     private String profile;
@@ -20,20 +23,34 @@ public class User {
     private Date deletedAt;
     private Integer status;
 
-    public Integer getId() {
+    public User(String loginName, String username, String password) {
+        this.loginName = loginName;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -58,6 +75,22 @@ public class User {
 
     public void setGendel(String gendel) {
         this.gendel = gendel;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getBirthday() {

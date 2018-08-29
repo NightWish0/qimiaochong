@@ -24,8 +24,23 @@ public class BaseController {
         return "public/login";
     }
 
+    @PostMapping("/login")
+    public String login(){
+
+        return "public/login";
+    }
+
     @GetMapping("/register")
     public String registerPage(){
+        return "public/register";
+    }
+
+    @PostMapping("/register")
+    public String register(String loginName,String password,Model model){
+        boolean isSuccess=baseService.registerHandle(loginName,password,model);
+        if (isSuccess){
+            return "public/index";
+        }
         return "public/register";
     }
 
