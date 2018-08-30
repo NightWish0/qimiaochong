@@ -10,30 +10,30 @@ import java.util.Date;
 public class Topic implements Serializable {
 
     @Id
-    private Long id;
-    private Long userId;
+    private Integer id;
+    private Integer userId;
     private String title;
     private String content;
     private Integer likeCount;
-    private Long labelId;
+    private Integer labelId;
     private Date createdAt;
     private Date banAt;
     private Date deletedAt;
     private Integer status;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -61,11 +61,11 @@ public class Topic implements Serializable {
         this.likeCount = likeCount;
     }
 
-    public Long getLabelId() {
+    public Integer getLabelId() {
         return labelId;
     }
 
-    public void setLabelId(Long labelId) {
+    public void setLabelId(Integer labelId) {
         this.labelId = labelId;
     }
 

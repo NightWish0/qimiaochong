@@ -20,5 +20,7 @@ mapper:
   not-empty: true
   identity: MYSQL
   style: camelhump
-
-
+shiro:
+  login-url: /login
+  success-url: /
+  unauthorize-url: /login

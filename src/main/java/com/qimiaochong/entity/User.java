@@ -8,10 +8,11 @@ import java.util.Date;
 @Alias("User")
 public class User {
     @Id
-    private Long id;
+    private Integer id;
     private String loginName;
-    private String username;
+    private String userName;
     private String password;
+    private String salt;
     private String avatar;
     private String gendel;
     private String phone;
@@ -23,17 +24,18 @@ public class User {
     private Date deletedAt;
     private Integer status;
 
-    public User(String loginName, String username, String password) {
+    public User(String loginName, String userName, String password,String salt) {
         this.loginName = loginName;
-        this.username = username;
+        this.userName = userName;
         this.password = password;
+        this.salt = salt;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -45,12 +47,12 @@ public class User {
         this.loginName = loginName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -59,6 +61,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getAvatar() {

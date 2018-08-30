@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qimiaochong.dao.UserDao">
 
-    <select id="findById" parameterType="long" resultType="User">
+    <select id="findById" parameterType="int" resultType="User">
         SELECT * FROM sys_user WHERE id=#{id}
     </select>
 
-    <select id="checkUserIsExists" resultType="int">
-        SELECT COUNT(id) FROM sys_user WHERE login_name=#{loginName} or phone=#{loginName}
+    <select id="checkUserIsExists" resultType="User">
+        SELECT * FROM sys_user WHERE login_name=#{loginName} or phone=#{loginName}
     </select>
 
     <insert id="create" parameterType="User" useGeneratedKeys="true" keyProperty="long">
-        INSERT INTO sys_user() VALUES
+        INSERT INTO sys_user(login_name,username,password,salt) VALUES(#{loginName},#{userName},#{password},#{salt})
     </insert>
 
 </mapper>

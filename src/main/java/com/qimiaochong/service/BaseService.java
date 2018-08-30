@@ -6,5 +6,7 @@ public interface BaseService {
 
     void initIndexContent(Model model);
 
-    boolean registerHandle(String loginName,String password,Model model);
+    boolean registerHandle(String loginName,String password,String authPassword,Model model);
+
+    boolean login(String loginName,String password,Model model);
 }

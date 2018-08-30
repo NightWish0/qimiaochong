@@ -25,8 +25,11 @@ public class BaseController {
     }
 
     @PostMapping("/login")
-    public String login(){
-
+    public String login(String loginName,String password,Model model){
+        boolean isLogin=baseService.login(loginName,password,model);
+        if (isLogin){
+            return "public/index";
+        }
         return "public/login";
     }
 
@@ -36,8 +39,8 @@ public class BaseController {
     }
 
     @PostMapping("/register")
-    public String register(String loginName,String password,Model model){
-        boolean isSuccess=baseService.registerHandle(loginName,password,model);
+    public String register(String loginName,String password,String authPassword,Model model){
+        boolean isSuccess=baseService.registerHandle(loginName,password,authPassword,model);
         if (isSuccess){
             return "public/index";
         }

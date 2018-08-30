@@ -1,4 +1,4 @@
-package com.qimiaochong.common;
+package com.qimiaochong.common.util;
 
 public class TopicUtil {
 

@@ -8,19 +8,19 @@ public interface TopicService {
 
     List<Topic> findAllTopics(Integer pageNum,Integer pageSize);
 
-    Topic findOne(Long id);
+    Topic findOne(Integer id);
 
     boolean updateOfUser(Topic topic);
 
     boolean create(Topic topic);
 
-    boolean ban(Long id);
+    boolean ban(Integer id);
 
-    boolean unBan(Long id);
+    boolean unBan(Integer id);
 
-    boolean delete(Long id);
+    boolean delete(Integer id);
 
-    boolean destroy(Long id);
+    boolean destroy(Integer id);
 
 
 }
