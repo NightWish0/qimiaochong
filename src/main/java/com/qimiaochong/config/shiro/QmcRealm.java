@@ -6,6 +6,7 @@ import com.qimiaochong.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -18,7 +19,8 @@ public class QmcRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        SimpleAuthorizationInfo authenticationInfo=new SimpleAuthorizationInfo();
+        return authenticationInfo;
     }
 
     /**
@@ -42,7 +44,7 @@ public class QmcRealm extends AuthorizingRealm {
             if (encodePwd.equals(user.getPassword())){
                 Session session=SecurityUtils.getSubject().getSession();
                 session.setAttribute("user",user);
-                return new SimpleAuthenticationInfo(loginName,encodePwd,"qmc_realm");
+                return new SimpleAuthenticationInfo(loginName,stringBuffer.toString(),getName());
             }else{
                 throw new IncorrectCredentialsException();
             }

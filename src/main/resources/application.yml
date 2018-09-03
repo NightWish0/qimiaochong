@@ -21,6 +21,9 @@ mapper:
   identity: MYSQL
   style: camelhump
 shiro:
-  login-url: /login
-  success-url: /
-  unauthorize-url: /login
+  userNativeSessionManager: true
+  sessionManager:
+    sessionIdUrlRewritingEnabled: false
+  loginUrl: /login
+  successUrl: /
+

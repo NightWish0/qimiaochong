@@ -24,7 +24,10 @@ public class User {
     private Date deletedAt;
     private Integer status;
 
-    public User(String loginName, String userName, String password,String salt) {
+    public User() {
+    }
+
+    public User(String loginName, String userName, String password, String salt) {
         this.loginName = loginName;
         this.userName = userName;
         this.password = password;

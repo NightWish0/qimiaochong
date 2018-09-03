@@ -68,6 +68,10 @@
     text-align: center;
     margin-top: 20px;
 }
+.login-page .tip-msg{
+    text-align: center;
+    color: red;
+}
 
 /*register.html*/
 .register-page{
@@ -134,4 +138,8 @@
     text-align: center;
     padding-top: 10px;
     border-top: 1px dashed #cec8c8;
+}
+.register-page .tip-msg{
+    text-align: center;
+    color: red;
 }

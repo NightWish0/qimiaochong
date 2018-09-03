@@ -8,5 +8,5 @@ public interface BaseService {
 
     boolean registerHandle(String loginName,String password,String authPassword,Model model);
 
-    boolean login(String loginName,String password,Model model);
+    boolean loginHandle(String loginName,String password,Model model);
 }

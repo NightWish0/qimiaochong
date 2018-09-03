@@ -26,9 +26,9 @@ public class BaseController {
 
     @PostMapping("/login")
     public String login(String loginName,String password,Model model){
-        boolean isLogin=baseService.login(loginName,password,model);
+        boolean isLogin=baseService.loginHandle(loginName,password,model);
         if (isLogin){
-            return "public/index";
+            return "redirect:/";
         }
         return "public/login";
     }

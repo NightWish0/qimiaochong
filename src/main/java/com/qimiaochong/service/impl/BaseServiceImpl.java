@@ -14,6 +14,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,9 @@ public class BaseServiceImpl implements BaseService {
             items.add(map);
         }
         model.addAttribute("items",items);
+        Session session=SecurityUtils.getSubject().getSession();
+        User user= (User) session.getAttribute("user");
+        model.addAttribute("user",user);
     }
 
     @Override
@@ -75,7 +79,7 @@ public class BaseServiceImpl implements BaseService {
     }
 
     @Override
-    public boolean login(String loginName, String password,Model model) {
+    public boolean loginHandle(String loginName, String password,Model model) {
         Subject subject=SecurityUtils.getSubject();
         if (!subject.isAuthenticated()){
             UsernamePasswordToken token=new UsernamePasswordToken(loginName,password);
@@ -83,6 +87,7 @@ public class BaseServiceImpl implements BaseService {
                 subject.login(token);
                 return true;
             }catch (AuthenticationException ae){
+                model.addAttribute("loginName",loginName);
                 model.addAttribute("msg","用户名或者密码错误");
                 return false;
             }
