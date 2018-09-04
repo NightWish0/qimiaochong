@@ -6,5 +6,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css");
 /* Ionicons */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css");
-
+/* jvectormap */
+@import url("../adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.css");
 
