@@ -30,4 +30,10 @@ public class Md5Util {
         String encodePwd=hash.toHex();
         return encodePwd;
     }
+
+    public static void main(String[] args){
+        Map<String,String> map=encodeMd5Salt("admin","admin");
+        System.out.println(map.get("salt"));
+        System.out.println(map.get("password"));
+    }
 }

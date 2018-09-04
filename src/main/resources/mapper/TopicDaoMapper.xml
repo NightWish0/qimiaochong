@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qimiaochong.dao.TopicDao">
+<mapper namespace="com.qimiaochong.common.dao.TopicDao">
 
     <sql id="orderByCreated">
         ORDER BY created_at DESC
@@ -34,7 +34,7 @@
         UPDATE topic SET ban_at=#{banAt},status=#{status} WHERE id=#{id}
     </update>
 
-    <update id="delete">
+    <update id="deleteOfTemporary">
          UPDATE topic SET deleted_at=#{deletedAt},status=#{status} WHERE id=#{id}
     </update>
 
