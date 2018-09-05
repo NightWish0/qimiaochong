@@ -1,8 +1,8 @@
 package com.qimiaochong.common.config.shiro;
 
+import com.qimiaochong.common.BaseStatusCode;
 import com.qimiaochong.common.dao.SysPermissionDao;
 import com.qimiaochong.common.dao.SysRoleDao;
-import com.qimiaochong.common.entity.SysRole;
 import com.qimiaochong.common.util.Md5Util;
 import com.qimiaochong.common.dao.UserDao;
 import com.qimiaochong.common.entity.User;
@@ -16,9 +16,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class QmcRealm extends AuthorizingRealm {
 
@@ -77,6 +75,9 @@ public class QmcRealm extends AuthorizingRealm {
         String loginName=token.getPrincipal().toString();
         User user=userDao.checkUserIsExists(loginName);
         if (user != null){
+            if(user.getStatus()==BaseStatusCode.USER_BAN_STATUS){
+                throw new LockedAccountException();
+            }
             StringBuffer stringBuffer=new StringBuffer();
             for (char i:token.getPassword()){
                 stringBuffer.append(i);
@@ -93,4 +94,6 @@ public class QmcRealm extends AuthorizingRealm {
             throw new UnknownAccountException();
         }
     }
+
+
 }

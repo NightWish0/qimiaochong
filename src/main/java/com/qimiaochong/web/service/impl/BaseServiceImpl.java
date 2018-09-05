@@ -1,7 +1,7 @@
 package com.qimiaochong.web.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.qimiaochong.common.TopicStatus;
+import com.qimiaochong.common.BaseStatusCode;
 import com.qimiaochong.common.util.Md5Util;
 import com.qimiaochong.common.util.TopicUtil;
 import com.qimiaochong.common.dao.TopicDao;
@@ -11,6 +11,7 @@ import com.qimiaochong.common.entity.User;
 import com.qimiaochong.web.service.BaseService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -34,7 +35,7 @@ public class BaseServiceImpl implements BaseService {
     @Override
     public void initIndexContent(Model model) {
         PageHelper.startPage(1,10);
-        List<Topic> topics=topicDao.findAll(TopicStatus.NORMAL_STATUS);
+        List<Topic> topics=topicDao.findAll(BaseStatusCode.TOPIC_NORMAL_STATUS);
         List<Map<String,String>> items=new ArrayList<>();
         for (Topic topic:topics){
             Map<String,String> map=new HashMap<>();
@@ -89,7 +90,11 @@ public class BaseServiceImpl implements BaseService {
                     return "admin";
                 }
                 return "user";
-            }catch (AuthenticationException ae){
+            }catch(LockedAccountException lae){
+                model.addAttribute("loginName",loginName);
+                model.addAttribute("msg","用户已被禁用");
+                return "unknown";
+            }catch(AuthenticationException ae){
                 model.addAttribute("loginName",loginName);
                 model.addAttribute("msg","用户名或者密码错误");
                 return "unknown";

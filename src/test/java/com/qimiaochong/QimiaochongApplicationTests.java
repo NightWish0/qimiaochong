@@ -1,8 +1,11 @@
 package com.qimiaochong;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -13,4 +16,12 @@ public class QimiaochongApplicationTests {
     public void contextLoads() {
     }
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Test
+    public void test(){
+        redisTemplate.opsForValue().set("test","redis");
+        Assert.assertEquals("redis",redisTemplate.opsForValue().get("test"));
+    }
 }

@@ -33,7 +33,7 @@ public class BaseController {
         if (loginMsg.equals("user")){
             return "redirect:/";
         }
-        return "public/login";
+        return "redirect:/login";
     }
 
     @GetMapping("/register")
@@ -47,7 +47,7 @@ public class BaseController {
         if (isSuccess){
             return "public/index";
         }
-        return "public/register";
+        return "redirect:/register";
     }
 
 
