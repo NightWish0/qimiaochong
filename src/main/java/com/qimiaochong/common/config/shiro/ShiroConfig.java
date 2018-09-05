@@ -20,11 +20,18 @@ public class ShiroConfig {
         return new QmcRealm();
     }
 
+    //redis缓存
+    @Bean
+    public CacheManager cacheManager(){
+        return new RedisCacheManager();
+    }
+
     //安全管理器
     @Bean
     public DefaultWebSecurityManager securityManager(){
         DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
         securityManager.setRealm(realm());
+        securityManager.setCacheManager(cacheManager());
         return securityManager;
     }
 
@@ -61,11 +68,6 @@ public class ShiroConfig {
 //        filter.addPathDefinition("/**","authc");
 //        return filter;
 //    }
-
-    @Bean
-    public CacheManager cacheManager(){
-        return new MemoryConstrainedCacheManager();
-    }
 
     /**
      * 启用shrio授权注解拦截方式，AOP式方法级权限检查
