@@ -2,25 +2,32 @@ package com.qimiaochong.common.config.shiro;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Collection;
 import java.util.Set;
 
-public class RedisCache implements Cache {
+public class ShiroRedisCache<K,V> implements Cache<K,V> {
 
-    private org.springframework.cache.Cache springCache;
+    @Autowired
+    private RedisTemplate<K,V> redisTemplate;
 
-    public RedisCache(org.springframework.cache.Cache springCache) {
-        this.springCache = springCache;
+    private String cacheKey;
+
+    public ShiroRedisCache(String cacheKey) {
+        this.cacheKey = cacheKey;
+    }
+
+    //通过key来获取对应的缓存对象
+    @Override
+    public V get(K key) throws CacheException {
+        return redisTemplate.opsForValue().get(key);
     }
 
     @Override
-    public Object get(Object o) throws CacheException {
-        return null;
-    }
-
-    @Override
-    public Object put(Object o, Object o2) throws CacheException {
+    public V put(K key, V value) throws CacheException {
+        redisTemplate.opsForValue().set(key,value);
         return null;
     }
 

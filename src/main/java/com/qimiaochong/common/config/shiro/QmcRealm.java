@@ -75,15 +75,15 @@ public class QmcRealm extends AuthorizingRealm {
         String loginName=token.getPrincipal().toString();
         User user=userDao.checkUserIsExists(loginName);
         if (user != null){
-            if(user.getStatus()==BaseStatusCode.USER_BAN_STATUS){
-                throw new LockedAccountException();
-            }
             StringBuffer stringBuffer=new StringBuffer();
             for (char i:token.getPassword()){
                 stringBuffer.append(i);
             }
             String encodePwd=Md5Util.encodeMd5Salt(loginName,stringBuffer.toString(),user.getSalt());
             if (encodePwd.equals(user.getPassword())){
+                if(user.getStatus()==BaseStatusCode.USER_BAN_STATUS){
+                    throw new LockedAccountException();
+                }
                 Session session=SecurityUtils.getSubject().getSession();
                 session.setAttribute("user",user);
                 return new SimpleAuthenticationInfo(loginName,stringBuffer.toString(),getName());

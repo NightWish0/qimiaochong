@@ -1,7 +1,6 @@
 package com.qimiaochong.common.config.shiro;
 
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -15,15 +14,16 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+    //自定义realm
     @Bean
     public Realm realm(){
         return new QmcRealm();
     }
 
-    //redis缓存
+    //redis缓存管理器
     @Bean
-    public CacheManager cacheManager(){
-        return new RedisCacheManager();
+    public ShiroRedisCacheManager shiroRedisCacheManager(){
+        return new ShiroRedisCacheManager();
     }
 
     //安全管理器
@@ -31,10 +31,11 @@ public class ShiroConfig {
     public DefaultWebSecurityManager securityManager(){
         DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
         securityManager.setRealm(realm());
-        securityManager.setCacheManager(cacheManager());
+        securityManager.setCacheManager(shiroRedisCacheManager());
         return securityManager;
     }
 
+    //过滤器
     @Bean
     public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean filterFactoryBean=new ShiroFilterFactoryBean();
