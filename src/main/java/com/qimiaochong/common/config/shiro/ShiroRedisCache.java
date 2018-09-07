@@ -28,6 +28,7 @@ public class ShiroRedisCache<K,V> implements Cache<K,V> {
     @Override
     public V put(K key, V value) throws CacheException {
         redisTemplate.opsForValue().set(key,value);
+        
         return null;
     }
 
