@@ -2,7 +2,6 @@ package com.qimiaochong.common.util;
 
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import redis.clients.jedis.Jedis;
 
 import java.util.HashMap;
 import java.util.Map;
