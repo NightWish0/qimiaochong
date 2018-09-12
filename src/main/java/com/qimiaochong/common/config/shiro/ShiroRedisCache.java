@@ -2,8 +2,6 @@ package com.qimiaochong.common.config.shiro;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
-import org.apache.shiro.subject.SimplePrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Collection;
@@ -33,8 +31,10 @@ public class ShiroRedisCache<K,V> implements Cache<K,V> {
     }
 
     @Override
-    public Object remove(Object o) throws CacheException {
-        return null;
+    public V remove(K key) throws CacheException {
+        V v=redisTemplate.opsForValue().get(getKey(key));
+        redisTemplate.delete(getKey(key));
+        return v;
     }
 
     @Override
