@@ -9,4 +9,6 @@ public interface BaseService {
     boolean registerHandle(String loginName,String password,String authPassword,Model model);
 
     String loginHandle(String loginName,String password,Model model);
+
+    void logout();
 }

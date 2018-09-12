@@ -9,6 +9,8 @@ import com.qimiaochong.common.dao.UserDao;
 import com.qimiaochong.common.entity.Topic;
 import com.qimiaochong.common.entity.User;
 import com.qimiaochong.web.service.BaseService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -26,6 +28,7 @@ import java.util.Map;
 
 @Service
 public class BaseServiceImpl implements BaseService {
+    public static final Logger LOGGER=LogManager.getLogger(BaseServiceImpl.class);
 
     @Autowired
     UserDao userDao;
@@ -81,25 +84,36 @@ public class BaseServiceImpl implements BaseService {
 
     @Override
     public String loginHandle(String loginName, String password,Model model) {
+        LOGGER.info("用户登录---->用户名："+loginName);
         Subject subject=SecurityUtils.getSubject();
         if (!subject.isAuthenticated()){
             UsernamePasswordToken token=new UsernamePasswordToken(loginName,password);
+//            token.setRememberMe(true);
             try {
                 subject.login(token);
                 if (subject.hasRole("admin")){
                     return "admin";
                 }
+                LOGGER.info("登录成功----->用户名："+loginName);
                 return "user";
             }catch(LockedAccountException lae){
+                LOGGER.info("登录失败，用户被禁用----->用户名："+loginName);
                 model.addAttribute("loginName",loginName);
                 model.addAttribute("msg","用户已被禁用");
                 return "unknown";
             }catch(AuthenticationException ae){
+                LOGGER.info("登录失败，用户密码错误----->用户名："+loginName);
                 model.addAttribute("loginName",loginName);
                 model.addAttribute("msg","用户名或者密码错误");
                 return "unknown";
             }
         }
         return "unknown";
+    }
+
+    @Override
+    public void logout() {
+        Subject subject=SecurityUtils.getSubject();
+        subject.logout();
     }
 }

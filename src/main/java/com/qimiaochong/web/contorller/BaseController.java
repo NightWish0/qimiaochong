@@ -36,6 +36,12 @@ public class BaseController {
         return "public/login";
     }
 
+    @PostMapping("/logout")
+    public String logout(){
+        baseService.logout();
+        return "redirect:/";
+    }
+
     @GetMapping("/register")
     public String registerPage(){
         return "public/register";

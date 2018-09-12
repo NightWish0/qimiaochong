@@ -17,7 +17,6 @@ public class ShiroRedisCacheManager implements CacheManager {
 
     @Override
     public <K, V> Cache<K, V> getCache(String name) throws CacheException {
-        System.out.println("###########"+name);
         return new ShiroRedisCache<K,V>(redisTemplate,CACHE_PREFIX+name);
     }
 }
