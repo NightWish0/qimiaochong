@@ -3,9 +3,10 @@ package com.qimiaochong.common.entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
-public class SysPermission {
+public class SysPermission implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

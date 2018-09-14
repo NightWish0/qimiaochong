@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,9 +56,11 @@ public class BaseServiceImpl implements BaseService {
             items.add(map);
         }
         model.addAttribute("items",items);
-        Session session=SecurityUtils.getSubject().getSession();
-        User user= (User) session.getAttribute("user");
-        model.addAttribute("user",user);
+        Session session=SecurityUtils.getSubject().getSession(false);
+        if (session!=null){
+            User user= (User) session.getAttribute("user");
+            model.addAttribute("user",user);
+        }
     }
 
     @Override

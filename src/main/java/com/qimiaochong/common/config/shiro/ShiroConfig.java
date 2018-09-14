@@ -1,13 +1,11 @@
 package com.qimiaochong.common.config.shiro;
 
-import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
-import org.apache.shiro.session.mgt.SessionManager;
-import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,21 +29,25 @@ public class ShiroConfig {
         return new ShiroRedisCacheManager();
     }
 
-    //redis会话原理
+    //redis会话管理
     @Bean
-    public SessionManager sessionManager(){
-        DefaultSessionManager sessionManager=new DefaultSessionManager();
-        sessionManager.setSessionDAO(new ShiroSessionDao(new RedisTemplate()));
+    public DefaultWebSessionManager defaultWebSessionManager(RedisTemplate redisTemplate){
+        DefaultWebSessionManager sessionManager=new DefaultWebSessionManager();
+        sessionManager.setSessionDAO(new ShiroSessionDao(redisTemplate));
+        sessionManager.setGlobalSessionTimeout(1800);
+        //删除过期的session（待改进）
+        sessionManager.setDeleteInvalidSessions(true);
         return sessionManager;
     }
 
     //安全管理器
     @Bean
-    public DefaultWebSecurityManager securityManager(){
+    @Autowired
+    public DefaultWebSecurityManager securityManager(RedisTemplate redisTemplate){
         DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
         securityManager.setRealm(realm());
         securityManager.setCacheManager(shiroRedisCacheManager());
-        securityManager.setSessionManager(sessionManager());
+        securityManager.setSessionManager(defaultWebSessionManager(redisTemplate));
         return securityManager;
     }
 

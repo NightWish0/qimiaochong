@@ -13,6 +13,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.SessionKey;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,12 @@ public class QmcRealm extends AuthorizingRealm {
         }
         //授权
         SimpleAuthorizationInfo authenticationInfo=new SimpleAuthorizationInfo();
-        User user= (User) subject.getSession().getAttribute("user");
+        Session session=subject.getSession(false);
+        User user=null;
+        if (session!=null){
+            user= (User) subject.getSession(false).getAttribute("user");
+            System.out.println("################### "+subject.getSession().getId());
+        }
         if (user!=null){
             //添加角色
             List<String> roleCodes=sysRoleDao.getRoleCodes(user.getId());
@@ -87,6 +93,7 @@ public class QmcRealm extends AuthorizingRealm {
                 }
                 Session session=SecurityUtils.getSubject().getSession();
                 session.setAttribute("user",user);
+                System.out.println("################### "+session.getId());
                 return new SimpleAuthenticationInfo(loginName,stringBuffer.toString(),getName());
             }else{
                 throw new IncorrectCredentialsException();
