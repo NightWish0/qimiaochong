@@ -12,6 +12,8 @@ public interface UserDao extends BaseMapper<User> {
 
     User findById(Integer id);
 
+    User findByLoginName(String loginName);
+
     User checkUserIsExists(@Param("loginName") String loginName);
 
     int create(User user);

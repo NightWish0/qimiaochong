@@ -5,6 +5,7 @@ import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -37,6 +38,7 @@ public class ShiroConfig {
         sessionManager.setGlobalSessionTimeout(1800);
         //删除过期的session（待改进）
         sessionManager.setDeleteInvalidSessions(true);
+        sessionManager.setSessionIdCookieEnabled(true);
         return sessionManager;
     }
 

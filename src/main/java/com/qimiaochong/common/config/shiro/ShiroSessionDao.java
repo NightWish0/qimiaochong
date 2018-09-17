@@ -1,7 +1,6 @@
 package com.qimiaochong.common.config.shiro;
 
 import org.apache.shiro.session.Session;
-import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -28,41 +27,55 @@ public class ShiroSessionDao extends EnterpriseCacheSessionDAO{
 
     @Override
     protected Serializable doCreate(Session session) {
-        Serializable sessionId=super.doCreate(session);
+        Serializable sessionId=this.generateSessionId(session);
+        this.assignSessionId(session,sessionId);
         redisTemplate.opsForValue().set(getKey(sessionId),session,EXPIRE_TIME,TimeUnit.SECONDS);
-        System.out.println("================ "+session.getId());
+
+//        Serializable sessionId=super.doCreate(session);
+//        redisTemplate.opsForValue().set(getKey(sessionId),session,EXPIRE_TIME,TimeUnit.SECONDS);
         return sessionId;
     }
 
     @Override
     protected Session doReadSession(Serializable sessionId) {
-        Session session=super.doReadSession(sessionId);
-        if (session==null){
-            session= (Session) redisTemplate.opsForValue().get(getKey(sessionId));
-//            refreshSession(getKey(sessionId));
+        if (sessionId==null){
+            return null;
         }
+        Session session=(Session) redisTemplate.opsForValue().get(getKey(sessionId));
+
+//        Session session=super.doReadSession(sessionId);
+//        if (session==null){
+//            session= (Session) redisTemplate.opsForValue().get(getKey(sessionId));
+//        }
         return session;
     }
 
     @Override
     protected void doUpdate(Session session) {
-        if(session==null || session.getId()==null){
+        if (session==null||session.getId()==null){
             return;
         }
-        super.doUpdate(session);
         Serializable sessionId=session.getId();
-        redisTemplate.opsForValue().set(getKey(sessionId),session);
-        refreshSession(getKey(sessionId));
+        redisTemplate.opsForValue().set(getKey(sessionId),session,EXPIRE_TIME,TimeUnit.SECONDS);
+
+//        super.doUpdate(session);
+//        Serializable sessionId=session.getId();
+//        if (sessionId!=null){
+//            redisTemplate.opsForValue().set(getKey(sessionId),session,EXPIRE_TIME,TimeUnit.SECONDS);
+//        }
     }
 
     @Override
     protected void doDelete(Session session) {
-        if(session==null || session.getId()==null){
+        if (session==null||session.getId()==null){
             return;
         }
-        super.doDelete(session);
         Serializable sessionId=session.getId();
         redisTemplate.delete(getKey(sessionId));
+
+//        super.doDelete(session);
+//        Serializable sessionId=session.getId();
+//        redisTemplate.delete(getKey(sessionId));
     }
 
     // 获取活跃的session，可以用来统计在线人数，如果要实现这个功能，
@@ -77,7 +90,4 @@ public class ShiroSessionDao extends EnterpriseCacheSessionDAO{
         return PREFIX+sessionId.toString();
     }
 
-    private void refreshSession(String key){
-        redisTemplate.expire(key,EXPIRE_TIME,TimeUnit.SECONDS);
-    }
 }

@@ -6,6 +6,10 @@
         SELECT * FROM sys_user WHERE id=#{id}
     </select>
 
+    <select id="findByLoginName" parameterType="string" resultType="User">
+        SELECT * FROM sys_user WHERE login_name=#{loginName}
+    </select>
+
     <select id="checkUserIsExists" resultType="User" parameterType="string">
         SELECT * FROM sys_user WHERE login_name=#{loginName} or phone=#{loginName}
     </select>

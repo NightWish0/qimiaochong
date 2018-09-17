@@ -52,12 +52,9 @@ public class QmcRealm extends AuthorizingRealm {
         }
         //授权
         SimpleAuthorizationInfo authenticationInfo=new SimpleAuthorizationInfo();
-        Session session=subject.getSession(false);
-        User user=null;
-        if (session!=null){
-            user= (User) subject.getSession(false).getAttribute("user");
-            System.out.println("################### "+subject.getSession().getId());
-        }
+        String name= (String) principalCollection.getPrimaryPrincipal();
+        User userT= (User) subject.getPrincipal();
+        User user=userDao.findByLoginName(name);
         if (user!=null){
             //添加角色
             List<String> roleCodes=sysRoleDao.getRoleCodes(user.getId());
@@ -93,7 +90,6 @@ public class QmcRealm extends AuthorizingRealm {
                 }
                 Session session=SecurityUtils.getSubject().getSession();
                 session.setAttribute("user",user);
-                System.out.println("################### "+session.getId());
                 return new SimpleAuthenticationInfo(loginName,stringBuffer.toString(),getName());
             }else{
                 throw new IncorrectCredentialsException();
