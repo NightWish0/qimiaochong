@@ -11,6 +11,7 @@
   * `Maven`构建项目
   * 页面引擎采用 `Thymeleaf`
   * 数据库连接池使用`Druid`
+  * 集中式缓存使用`Redis`
   * `Shiro`权限框架，权限基于RBAC设计
   * `Mapper`MyBatis通用扩展插件
   * `PageHelper`MyBatis分页插件
