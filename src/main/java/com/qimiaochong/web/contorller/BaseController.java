@@ -23,6 +23,7 @@ public class BaseController {
 
     @GetMapping("/login")
     public String loginPage(){
+        System.out.println("########################");
         return "public/login";
     }
 

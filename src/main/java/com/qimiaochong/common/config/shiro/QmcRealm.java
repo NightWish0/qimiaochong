@@ -53,7 +53,6 @@ public class QmcRealm extends AuthorizingRealm {
         //授权
         SimpleAuthorizationInfo authenticationInfo=new SimpleAuthorizationInfo();
         String name= (String) principalCollection.getPrimaryPrincipal();
-        User userT= (User) subject.getPrincipal();
         User user=userDao.findByLoginName(name);
         if (user!=null){
             //添加角色

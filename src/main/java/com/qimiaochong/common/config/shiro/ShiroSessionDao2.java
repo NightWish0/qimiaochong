@@ -1,7 +1,8 @@
 package com.qimiaochong.common.config.shiro;
 
 import org.apache.shiro.session.Session;
-import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
+import org.apache.shiro.session.UnknownSessionException;
+import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.io.Serializable;
@@ -10,10 +11,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author: NightWish
- * @create: 2018-09-12 14:52
- * @description: 自定义session Dao
+ * @create: 2018-09-18 15:54
+ * @description:
  **/
-public class ShiroSessionDao extends EnterpriseCacheSessionDAO{
+public class ShiroSessionDao2 extends AbstractSessionDAO {
+
     //redis中session的名称前缀
     private static final String PREFIX="shiro_session_id:";
 
@@ -21,7 +23,7 @@ public class ShiroSessionDao extends EnterpriseCacheSessionDAO{
 
     private RedisTemplate redisTemplate;
 
-    public ShiroSessionDao(RedisTemplate redisTemplate) {
+    public ShiroSessionDao2(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
@@ -30,9 +32,6 @@ public class ShiroSessionDao extends EnterpriseCacheSessionDAO{
         Serializable sessionId=this.generateSessionId(session);
         this.assignSessionId(session,sessionId);
         redisTemplate.opsForValue().set(getKey(sessionId),session,EXPIRE_TIME,TimeUnit.SECONDS);
-
-//        Serializable sessionId=super.doCreate(session);
-//        redisTemplate.opsForValue().set(getKey(sessionId),session,EXPIRE_TIME,TimeUnit.SECONDS);
         return sessionId;
     }
 
@@ -45,16 +44,11 @@ public class ShiroSessionDao extends EnterpriseCacheSessionDAO{
         if(redisTemplate.hasKey(getKey(sessionId))){
             session=(Session) redisTemplate.opsForValue().get(getKey(sessionId));
         }
-
-//        Session session=super.doReadSession(sessionId);
-//        if (session==null){
-//            session= (Session) redisTemplate.opsForValue().get(getKey(sessionId));
-//        }
         return session;
     }
 
     @Override
-    protected void doUpdate(Session session) {
+    public void update(Session session) throws UnknownSessionException {
         if (session==null||session.getId()==null){
             return;
         }
@@ -62,30 +56,17 @@ public class ShiroSessionDao extends EnterpriseCacheSessionDAO{
         if(redisTemplate.hasKey(getKey(sessionId))){
             redisTemplate.opsForValue().set(getKey(sessionId),session,EXPIRE_TIME,TimeUnit.SECONDS);
         }
-
-//        super.doUpdate(session);
-//        Serializable sessionId=session.getId();
-//        if (sessionId!=null){
-//            redisTemplate.opsForValue().set(getKey(sessionId),session,EXPIRE_TIME,TimeUnit.SECONDS);
-//        }
     }
 
     @Override
-    protected void doDelete(Session session) {
+    public void delete(Session session) {
         if (session==null||session.getId()==null){
             return;
         }
         Serializable sessionId=session.getId();
         redisTemplate.delete(getKey(sessionId));
-
-//        super.doDelete(session);
-//        Serializable sessionId=session.getId();
-//        redisTemplate.delete(getKey(sessionId));
     }
 
-    // 获取活跃的session，可以用来统计在线人数，如果要实现这个功能，
-    // 可以在将session加入redis时指定一个session前缀，
-    // 统计的时候则使用keys("prefix*")的方式来模糊查找redis中所有的session集合
     @Override
     public Collection<Session> getActiveSessions() {
         return redisTemplate.keys(PREFIX+"*");
@@ -94,5 +75,4 @@ public class ShiroSessionDao extends EnterpriseCacheSessionDAO{
     private String getKey(Serializable sessionId){
         return PREFIX+sessionId.toString();
     }
-
 }
