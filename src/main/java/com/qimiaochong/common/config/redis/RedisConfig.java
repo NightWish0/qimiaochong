@@ -1,5 +1,7 @@
 package com.qimiaochong.common.config.redis;
 
+import com.alibaba.fastjson.parser.ParserConfig;
+import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -32,15 +34,24 @@ public class RedisConfig {
         redisTemplate.setConnectionFactory(factory);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+
+        //自定义序列化
+        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+        CustomRedisSerializer customRedisSerializer=new CustomRedisSerializer(Object.class);
+
+        redisTemplate.setValueSerializer(customRedisSerializer);
+        redisTemplate.setHashValueSerializer(customRedisSerializer);
+
         //使用genericJackson2JsonRedisSerializer序列化
-        redisTemplate.setValueSerializer(genericJackson2JsonRedisSerializer());
-        redisTemplate.setHashValueSerializer(genericJackson2JsonRedisSerializer());
+//        redisTemplate.setValueSerializer(genericJackson2JsonRedisSerializer());
+//        redisTemplate.setHashValueSerializer(genericJackson2JsonRedisSerializer());
         //使用fastjson序列化<错误：无法完全序列化>
 //        FastJsonRedisSerializer fastJsonRedisSerializer=new FastJsonRedisSerializer(Object.class);
 //        redisTemplate.setValueSerializer(fastJsonRedisSerializer);
 //        redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
-        redisTemplate.setValueSerializer(genericFastJsonRedisSerializer());
-        redisTemplate.setHashValueSerializer(genericFastJsonRedisSerializer());
+
+//        redisTemplate.setValueSerializer(genericFastJsonRedisSerializer());
+//        redisTemplate.setHashValueSerializer(genericFastJsonRedisSerializer());
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }

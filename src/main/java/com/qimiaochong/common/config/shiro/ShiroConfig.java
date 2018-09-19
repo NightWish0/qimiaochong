@@ -1,13 +1,10 @@
 package com.qimiaochong.common.config.shiro;
 
 import org.apache.shiro.realm.Realm;
-import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.SimpleCookie;
-import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +38,9 @@ public class ShiroConfig {
         //删除过期的session（待改进）
         shiroSessionManager.setDeleteInvalidSessions(true);
         shiroSessionManager.setSessionIdCookieEnabled(true);
+        // 是否定时检查session
+        shiroSessionManager.setSessionValidationSchedulerEnabled(true);
+
         return shiroSessionManager;
     }
 

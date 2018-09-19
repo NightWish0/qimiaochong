@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
  * 启用SpringCache+Redis缓存
  */
 
-@Configuration
-@EnableCaching
+//@Configuration
+//@EnableCaching
 public class RedisCacheConfig {
 }

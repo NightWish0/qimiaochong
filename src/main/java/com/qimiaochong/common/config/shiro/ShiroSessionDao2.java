@@ -5,6 +5,7 @@ import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.servlet.Servlet;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +33,7 @@ public class ShiroSessionDao2 extends AbstractSessionDAO {
         Serializable sessionId=this.generateSessionId(session);
         this.assignSessionId(session,sessionId);
         redisTemplate.opsForValue().set(getKey(sessionId),session,EXPIRE_TIME,TimeUnit.SECONDS);
+        Session session1= (Session) redisTemplate.opsForValue().get(getKey(sessionId));
         return sessionId;
     }
 
