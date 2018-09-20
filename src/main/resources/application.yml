@@ -3,7 +3,7 @@ spring:
     active: dev
 logging:
   config: classpath:log4j2.yml
-debug: false
+debug: true
 
 ## mybatis
 mybatis:

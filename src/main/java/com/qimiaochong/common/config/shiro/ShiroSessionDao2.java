@@ -5,7 +5,6 @@ import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import javax.servlet.Servlet;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;

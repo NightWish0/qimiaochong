@@ -34,7 +34,7 @@ public class ShiroConfig {
     public ShiroSessionManager shiroSessionManager(RedisTemplate redisTemplate){
         ShiroSessionManager shiroSessionManager=new ShiroSessionManager();
         shiroSessionManager.setSessionDAO(new ShiroSessionDao2(redisTemplate));
-        shiroSessionManager.setGlobalSessionTimeout(1800);
+//        shiroSessionManager.setGlobalSessionTimeout(1800000);
         //删除过期的session（待改进）
         shiroSessionManager.setDeleteInvalidSessions(true);
         shiroSessionManager.setSessionIdCookieEnabled(true);

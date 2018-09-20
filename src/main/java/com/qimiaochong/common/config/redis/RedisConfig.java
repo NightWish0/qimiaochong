@@ -36,11 +36,11 @@ public class RedisConfig {
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 
         //自定义序列化
-        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
-        CustomRedisSerializer customRedisSerializer=new CustomRedisSerializer(Object.class);
+//        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+//        CustomRedisSerializer customRedisSerializer=new CustomRedisSerializer(Object.class);
 
-        redisTemplate.setValueSerializer(customRedisSerializer);
-        redisTemplate.setHashValueSerializer(customRedisSerializer);
+//        redisTemplate.setValueSerializer(customRedisSerializer);
+//        redisTemplate.setHashValueSerializer(customRedisSerializer);
 
         //使用genericJackson2JsonRedisSerializer序列化
 //        redisTemplate.setValueSerializer(genericJackson2JsonRedisSerializer());

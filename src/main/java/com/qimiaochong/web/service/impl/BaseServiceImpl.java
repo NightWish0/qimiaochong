@@ -21,8 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +88,7 @@ public class BaseServiceImpl implements BaseService {
     public String loginHandle(String loginName, String password,Model model) {
         LOGGER.info("用户登录---->用户名："+loginName);
         Subject subject=SecurityUtils.getSubject();
+//        Subject subject=new Subject.Builder().buildSubject();
         if (!subject.isAuthenticated()){
             UsernamePasswordToken token=new UsernamePasswordToken(loginName,password);
 //            token.setRememberMe(true);
